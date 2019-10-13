@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/calendar"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Event</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+      <form [formGroup]="upadteEventForm"  (ngSubmit)="onSubmit(upadteEventForm.value)">
+            <ion-item class="eventname">
+              <ion-label position="floating" color="primary">Event Name</ion-label>
+              <ion-input type="text" [(ngModel)]="event_desc" formControlName="eventName" ></ion-input>
+            </ion-item> 
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.eventName">
+                <div class="error-message" *ngIf="upadteEventForm.get('eventName').hasError(validation.type) && (upadteEventForm.get('eventName').dirty || upadteEventForm.get('eventName').touched)">
+                  <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+            <ion-item>
+              <ion-label position="floating" color="primary">Start Date</ion-label>
+               <ion-datetime [(ngModel)]="startDate" formControlName="startDate" displayFormat="MM/DD/YYYY" max="3000-12-31"></ion-datetime>
+            </ion-item> 
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.startDate">
+                <div class="error-message" *ngIf="upadteEventForm.get('startDate').hasError(validation.type) && (upadteEventForm.get('startDate').dirty || upadteEventForm.get('startDate').touched)">
+                  <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                </div>
+              </ng-container>
+            </div> 
+            <ion-item>
+              <ion-label position="floating" color="primary">End Date</ion-label>
+               <ion-datetime  [(ngModel)]="endDate" formControlName="endDate" displayFormat="MM/DD/YYYY" max="3000-12-31"></ion-datetime>
+            </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.endDate">
+                <div class="error-message" *ngIf="upadteEventForm.get('endDate').hasError(validation.type) && (upadteEventForm.get('endDate').dirty || upadteEventForm.get('endDate').touched)">
+                  <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+             <ion-item>
+              <ion-label position="floating" color="primary">Start Time</ion-label>
+               <ion-datetime  [(ngModel)]="startDate" formControlName="startTime" displayFormat="hh:mm A" ></ion-datetime>
+            </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.startTime">
+                <div class="error-message" *ngIf="upadteEventForm.get('startTime').hasError(validation.type) && (upadteEventForm.get('startTime').dirty || upadteEventForm.get('startTime').touched)">
+                  <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+             <ion-item>
+              <ion-label position="floating" color="primary">End Time</ion-label>
+               <ion-datetime [(ngModel)]="endDate" formControlName="endTime" displayFormat="hh:mm A"></ion-datetime>
+            </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.endTime">
+                <div class="error-message" *ngIf="upadteEventForm.get('endTime').hasError(validation.type) && (upadteEventForm.get('endTime').dirty || upadteEventForm.get('endTime').touched)">
+                  <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+            <ion-item>
+              <ion-label position="floating" color="primary">Event Type</ion-label>
+                <ion-select [(ngModel)]="eventType" okText="Ok" cancelText="Cancel" color="primary" formControlName="eventType">
+                  <ion-select-option value="Vacation">Vacation</ion-select-option>
+                  <ion-select-option value="Sick">Sick</ion-select-option>
+                  <ion-select-option value="Other">Other</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.eventType">
+                <div class="error-message" *ngIf="upadteEventForm.get('eventType').hasError(validation.type) && (upadteEventForm.get('eventType').dirty || upadteEventForm.get('eventType').touched)">
+                  <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+              <div class="ion-text-center">
+                <ion-button color="primary" class="submit-btn" type="submit" [disabled]="!upadteEventForm.valid"><ion-icon name="create"></ion-icon>&nbsp;&nbsp;Update</ion-button>
+                <ion-button color="primary" class="submit-btn" type="submit" [disabled]="!upadteEventForm.valid"><ion-icon name="trash"></ion-icon>&nbsp;&nbsp;Delete</ion-button>
+              </div>
+      </form>
+        
+</ion-content>

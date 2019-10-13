@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Calendar</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/tabs/addevent']">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="loadEvents(true, $event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing..."></ion-refresher-content>
+    </ion-refresher>
+<ion-list *ngIf="events">
+    <ion-list-header>
+        <ion-label>ALL EVENTS</ion-label>
+      </ion-list-header>
+      <ion-item detail="true" *ngFor="let item of events" [routerLink]="['/tabs/eventdetails',item.id]">
+          <ion-label class="ion-text-wrap">
+            <ion-text color="primary">
+              <h3>{{item.startDate | date: 'MM/dd/yyyy'}}  to  {{item.endDate | date: 'MM/dd/yyyy'}}</h3>
+            </ion-text>
+            <p><b>{{item.calendar_event_type}}</b></p>
+            <p>{{item.event_desc}}</p>
+          </ion-label>
+        </ion-item>
+</ion-list>
+<ion-list *ngIf="!events">
+    <div class="noevnt">No Events</div>
+</ion-list>
+</ion-content>
